@@ -1,0 +1,16 @@
+<h1>Welcome to hashtag-finder, <%= current_user.email %></h1>
+
+<p><%= link_to "Search Hashtag" , new_hashtag_path %></p>
+
+
+<table>
+  
+  <tr>
+    <td>Your search history</td>
+  </tr>
+  <% @hashtags.each do |h| %>
+    <tr>
+      <td><%= h.htname %></td>
+    </tr>
+  <% end %>
+</table>
