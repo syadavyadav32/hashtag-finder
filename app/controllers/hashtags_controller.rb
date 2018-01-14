@@ -8,6 +8,7 @@ end
 
 def new 
   @hashtag = Hashtag.new
+   $client.search("to:justinbieber marry me", result_type: "recent").take(3) 
 end
 
 def create
