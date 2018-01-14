@@ -13,8 +13,8 @@ end
 def create
   @hashtag = Hashtag.new(article_params)
   @hashtag.user = current_user
-  @hashtag.save
-  render 'new'
+  render 'new' if @hashtag.save
+  
 end
 
 private
