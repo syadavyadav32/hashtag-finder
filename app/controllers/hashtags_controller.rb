@@ -8,13 +8,16 @@ end
 
 def new 
   @hashtag = Hashtag.new
-   $client.search("to:justinbieber marry me", result_type: "recent").take(3) 
 end
 
 def create
   @hashtag = Hashtag.new(article_params)
   @hashtag.user = current_user
-  render 'new' if @hashtag.save
+  if @hashtag.save
+    redirect_to tweets_path(@tweets, id: @hashtag.id)
+  else
+    render new
+  end
   
 end
 

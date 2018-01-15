@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
    root 'hashtags#index'
    
+   #get 'tweets',to: 'tweets#index'
+    match 'tweets/index' => 'tweets#index', via: [:get], :as => :tweets
+
+   
    resources :hashtags
 
   # Example of regular route:
