@@ -1,16 +1,36 @@
-<h2>Results for <%= @htname %> </h2>
-
+<h2>Results form Twitter for <%= @htname %> tag</h2>
 <table>
-    <tr>
-      <td>Username</td>
-      <td>Tweet</td>
-    </tr>
-<% $client.search(@htname, result_type: "recent").take(10).collect do |tweet| %>
-    <tr>
-      <td><%= "#{tweet.user.screen_name}" %></td> 
-      <td><%= "#{tweet.text}" %> </td>
-    </tr>
+  <tr>
+    <td>Username</td>
+    <td>Tweet</td>
+    <td>Total Retweets</td>
+    <td>Total Likes</td>
+  </tr>
+<% $client.search(@htname, result_type: "recent").take(100).collect do |tweet| %>
+  <tr>
+    <td><%= "#{tweet.user.screen_name}" %></td> 
+    <td><%= "#{tweet.text}" %> </td>
+    <td><%= tweet.retweet_count %></td>
+    <td><%= tweet.favorite_count  %></td>
+  </tr>
 <% end %>
 </table>
+
+<h2>Results from Instagram for <%= @htname %> tag</h2>
+<table>
+  <tr>
+    <td>Username</td> 
+    <td>Post</td>
+  </tr>
+  <%= InstagramApi.tag(@htname).recent_media({count:10}).each do |post| %>
+    <tr>
+      <td><%= "#{post.username}" %></td>
+      <td><%= "#{post.text}" %></td>
+    </tr>
+  <% end %>
+</table>
+</table>
+
+
 
 <%= link_to "Search New Hashtag", new_hashtag_path %>
