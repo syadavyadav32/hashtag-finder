@@ -11,7 +11,7 @@ def new
 end
 
 def create
-  @hashtag = Hashtag.new(article_params)
+  @hashtag = Hashtag.new(hashtag_params)
   @hashtag.user = current_user
   if @hashtag.save
     redirect_to tweets_path(@tweets, id: @hashtag.id)
@@ -23,7 +23,7 @@ end
 
 private
 
-def article_params
+def hashtag_params
   params.require(:hashtag).permit(:htname)
 end
 

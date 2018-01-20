@@ -11,7 +11,7 @@
     <td><%= "#{tweet.user.screen_name}" %></td> 
     <td><%= "#{tweet.text}" %> </td>
     <td><%= tweet.retweet_count %></td>
-    <td><%= tweet.favorite_count  %></td>
+    <td><%= tweet.favorite_count %></td>
   </tr>
 <% end %>
 </table>
@@ -22,10 +22,10 @@
     <td>Username</td> 
     <td>Post</td>
   </tr>
-  <% InstagramApi.tag(@hashtag).recent_media({count:10}).each do |ipost| %>
+  <% @hashtag_posts.each do |post| %>
   <tr>
-    <td><%= "#{ipost.data[0].user.username}" %></td>
-    <td><%= "#{ipost.data[0].caption.text}" %></td>
+    <td><%= post.user.username %></td>
+    <td><%= post.caption.text %></td>
   </tr>
   <%  end %>
 </table>
