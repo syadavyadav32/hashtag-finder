@@ -22,15 +22,12 @@
     <td>Username</td> 
     <td>Post</td>
   </tr>
-  <%= InstagramApi.tag(@htname).recent_media({count:10}).each do |post| %>
-    <tr>
-      <td><%= "#{post.username}" %></td>
-      <td><%= "#{post.text}" %></td>
-    </tr>
-  <% end %>
+  <% InstagramApi.tag(@hashtag).recent_media({count:10}).each do |ipost| %>
+  <tr>
+    <td><%= "#{ipost.data[0].user.username}" %></td>
+    <td><%= "#{ipost.data[0].caption.text}" %></td>
+  </tr>
+  <%  end %>
 </table>
-</table>
-
-
 
 <%= link_to "Search New Hashtag", new_hashtag_path %>
