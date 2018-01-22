@@ -4,15 +4,25 @@ class TweetsController < ApplicationController
     @hashtag = Hashtag.find(@hashtag_id).htname
     @hashtag_posts = InstagramApi.tag(@hashtag).recent_media({count:10}).data
     @htname = @hashtag.prepend("#")
-    
+ 
     @hashtag_posts.each do |htp|
-      @hash = Gmaps4rails.build_markers (htp) do |hashtag, marker|
-        if hashtag.location
-          marker.lat hashtag.location.latitude
-          marker.lng hashtag.location.longitude
-          marker.infowindow hashtag.caption.text
-        end
+      if htp.location
+        @tweet = Tweet.new(body: htp.caption.text, latitude: htp.location.latitude, longitude: htp.location.longitude)
+        @tweet.save
       end
     end
+    
+    @insta_posts = Tweet.all
+    
+      @hash = Gmaps4rails.build_markers (@insta_posts) do |hashtag, marker|
+          marker.lat hashtag.latitude
+          marker.lng hashtag.longitude
+          marker.infowindow hashtag.body
+      end
+      
+    @insta_posts.delete_all
+    
   end
+  
+  
 end

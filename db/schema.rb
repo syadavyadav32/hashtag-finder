@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112191416) do
+ActiveRecord::Schema.define(version: 20180122073746) do
 
   create_table "hashtags", force: :cascade do |t|
     t.string  "htname"
@@ -23,7 +23,9 @@ ActiveRecord::Schema.define(version: 20180112191416) do
   add_index "hashtags", ["user_id"], name: "index_hashtags_on_user_id"
 
   create_table "tweets", force: :cascade do |t|
-    t.text "body"
+    t.text  "body"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "users", force: :cascade do |t|
